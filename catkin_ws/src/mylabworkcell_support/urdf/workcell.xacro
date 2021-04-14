@@ -1,0 +1,247 @@
+<?xml version="1.0" ?>
+<robot name="myworkcell" xmlns:xacro="http://ros.org/wiki/xacro">
+  
+  <link name="world"/>
+
+  <link name="body" >
+    <visual>
+      <geometry>
+        <mesh filename="package://mylabworkcell_support/meshes/urbody.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.3 0.3 0.3 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://mylabworkcell_support/meshes/urbody.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="table" >
+    <visual>
+      <geometry>
+        <mesh filename="package://mylabworkcell_support/meshes/urtablenohole.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Redish">
+        <color rgba="0.55 0.55 0.5 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://mylabworkcell_support/meshes/urtablefree.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!--Use xacro macro-->
+  <!--Pillar link-->
+  <xacro:macro name="pillar_link" params="link_name link_pos">
+    <link name="${link_name}">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0.0 0.0 0.0"/>
+        <mass value="0.0"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+      </inertial>
+      <visual>
+      <origin xyz="${link_pos}" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://mylabworkcell_support/meshes/urhousing2100.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Redish">
+        <color rgba="0.55 0.55 0.5 1.0"/>
+      </material>
+    </visual>
+      <collision>
+      <origin xyz="${link_pos}" rpy="0.0 0.0 0.0"/>
+        <geometry>
+        <mesh filename="package://mylabworkcell_support/meshes/urhousing2100.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      </collision>
+    </link>
+    <joint name="world_to_+${link_name}" type="fixed">
+    <parent link="world"/>
+    <child link="${link_name}"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  </xacro:macro>
+
+  <!--Side link-->
+  <xacro:macro name="side_link" params="link_name link_pos">
+    <link name="${link_name}">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0.0 0.0 0.0"/>
+        <mass value="0.0"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+      </inertial>
+      <visual>
+      <origin xyz="${link_pos}" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://mylabworkcell_support/meshes/urhousing1200.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Redish">
+        <color rgba="0.55 0.55 0.5 1.0"/>
+      </material>
+    </visual>
+      <collision>
+      <origin xyz="${link_pos}" rpy="0.0 0.0 0.0"/>
+        <geometry>
+        <mesh filename="package://mylabworkcell_support/meshes/urhousing1200.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      </collision>
+    </link>
+    <joint name="world_to_+${link_name}" type="fixed">
+    <parent link="world"/>
+    <child link="${link_name}"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  </xacro:macro>
+
+  <!--Face link-->
+  <xacro:macro name="face_link" params="link_name link_pos">
+    <link name="${link_name}">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0.0 0.0 0.0"/>
+        <mass value="0.0"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+      </inertial>
+      <visual>
+      <origin xyz="${link_pos}" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://mylabworkcell_support/meshes/urhousing1500.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Redish">
+        <color rgba="0.55 0.55 0.5 1.0"/>
+      </material>
+    </visual>
+      <collision>
+      <origin xyz="${link_pos}" rpy="0.0 0.0 0.0"/>
+        <geometry>
+        <mesh filename="package://mylabworkcell_support/meshes/urhousing1500.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      </collision>
+    </link>
+    <joint name="world_to_+${link_name}" type="fixed">
+    <parent link="world"/>
+    <child link="${link_name}"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  </xacro:macro>
+
+  <!--pillar links-->
+  <xacro:pillar_link link_name="pillar_front_rgt" link_pos="${0.86+0.05+0.03} -0.78 0.0"/>
+  <xacro:pillar_link link_name="pillar_front_lft" link_pos="${0.86+0.05+0.03} 0.78 0.0"/>
+  <xacro:pillar_link link_name="pillar_back_rgt" link_pos="${0.86+0.05-1.23} -0.78 0.0"/>
+  <xacro:pillar_link link_name="pillar_back_lft" link_pos="${0.86+0.05-1.23} 0.78 0.0"/>
+  
+  <!--right side links-->
+  <xacro:side_link link_name="row_bottom_rgt_link" link_pos="${0.86+0.05-0.6} -0.78 0.075"/>
+  <xacro:side_link link_name="row_middle_rgt_link" link_pos="${0.86+0.05-0.6} -0.78 0.867"/>
+  <xacro:side_link link_name="row_top_rgt_link" link_pos="${0.86+0.05-0.6} -0.78 ${2.1-0.06}"/>
+
+  <!--left side links-->
+  <xacro:side_link link_name="row_bottom_lft_link" link_pos="${0.86+0.05-0.6} 0.78 0.075"/>
+  <xacro:side_link link_name="row_middle_lft_link" link_pos="${0.86+0.05-0.6} 0.78 0.867"/>
+  <xacro:side_link link_name="row_top_lft_link" link_pos="${0.86+0.05-0.6} 0.78 ${2.1-0.06}"/>
+
+  <!--front links-->
+  <xacro:face_link link_name="row_bottom_front_link" link_pos="${0.86+0.05+0.03} 0.0 0.075"/>
+  <xacro:face_link link_name="row_middle_front_link" link_pos="${0.86+0.05+0.03} 0.0 0.867"/>
+  <xacro:face_link link_name="row_top_front_link" link_pos="${0.86+0.05+0.03} 0.0 ${2.1-0.06}"/>
+
+  <!--back links-->
+  <xacro:face_link link_name="row_bottom_back_link" link_pos="${0.86+0.05-1.23} 0.0 ${2.1-0.53-0.06}"/>
+  <xacro:face_link link_name="row_middle_back_link" link_pos="${0.86+0.05-1.23} 0.0 ${2.1-0.264-0.06}"/>
+  <xacro:face_link link_name="row_top_back_link" link_pos="${0.86+0.05-1.23} 0.0 ${2.1-0.06}"/>
+
+
+  <link name="camera_frame"/>
+
+  <joint name="world_to_body" type="fixed">
+    <parent link="world"/>
+    <child link="body"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="world_to_table" type="fixed">
+    <parent link="world"/>
+    <child link="table"/>
+    <origin xyz="0.05 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="world_to_camera" type="fixed">
+    <parent link="world"/>
+    <child link="camera_frame"/>
+    <origin xyz="-0.25 -0.5 1.25" rpy="0 3.14159 0"/>
+  </joint>
+
+  <!--Include ur arm model-->
+  <xacro:include filename="$(find ur_description)/urdf/ur3.urdf.xacro"/>
+  <xacro:ur3_robot prefix="rgt_" joint_limited="true"/>
+  <xacro:ur3_robot prefix="lft_" joint_limited="true"/>
+
+  <!--Include robotiq 85 gripper model-->
+
+  <xacro:include filename='$(find robotiq_2f_85_gripper_visualization)/urdf/robotiq_arg2f_85_model.xacro'/>
+  <xacro:robotiq_arg2f_85 prefix="rgt_"/>
+  <xacro:robotiq_arg2f_85 prefix="lft_"/>
+  <!--
+  <joint name="table_to_robot" type="fixed">
+    <parent link="table"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  -->
+  <joint name="body_to_rgtarm" type="fixed">
+    <parent link="body"/>
+    <child link="rgt_base_link"/>
+    <origin xyz="0 -0.258 1.610" rpy="2.35619 0 0"/>
+  </joint>
+
+  <joint name="body_to_lft_arm" type="fixed">
+    <parent link="body"/>
+    <child link="lft_base_link"/>
+    <origin xyz="0 0.258 1.610" rpy="-2.35619 0 0"/>
+  </joint>
+
+
+  <joint name="gripper_to_rgt_arm" type="fixed">
+    <parent link="rgt_ee_link"/>
+    <!-- <parent link="body"/> -->
+    <child link="rgt_robotiq_arg2f_base_link"/>
+    <origin xyz="0 0 0" rpy="0 1.5707 0"/>
+  </joint>
+
+  <joint name="gripper_to_lft_arm" type="fixed">
+    <parent link="lft_ee_link"/>
+    <!-- <parent link="body"/> -->
+    <child link="lft_robotiq_arg2f_base_link"/>
+    <origin xyz="0 0 0" rpy="0 1.5707 0"/>
+  </joint>
+
+</robot>
+<!-- 
+<link name="link_name">
+  <inertial>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <mass value="0.0"/>
+    <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+  </inertial>
+  <visual name="">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <geometry>
+      <box size="0.0 0.0 0.0"/>
+    </geometry>
+    <material name="">
+      <color rgba="1.0 0.0 0.0 1.0"/>
+      <texture filename=""/>
+    </material>
+  </visual>
+  <collision>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <geometry>
+      <box size="0.0 0.0 0.0"/>
+    </geometry>
+  </collision>
+</link> -->
