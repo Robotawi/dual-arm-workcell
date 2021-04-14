@@ -1,0 +1,20 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/home/zozo/catkin_ws_test/devel/include/**",
+        "/opt/ros/melodic/include/**",
+        "/home/zozo/catkin_ws_test/src/mastering_ros_robot_desc_pkg/include/**",
+        "/home/zozo/catkin_ws_test/src/myworkcell_core/include/**",
+        "/home/zozo/catkin_ws_test/src/universal_robot/ur_kinematics/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS"
+    }
+  ],
+  "version": 4
+}
