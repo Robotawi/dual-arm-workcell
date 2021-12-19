@@ -1,0 +1,24 @@
+controller_list:
+  - name: fake_rgt_arm_controller
+    type: $(arg execution_type)
+    joints:
+      - rgt_shoulder_pan_joint
+      - rgt_shoulder_lift_joint
+      - rgt_elbow_joint
+      - rgt_wrist_1_joint
+      - rgt_wrist_2_joint
+      - rgt_wrist_3_joint
+  - name: fake_lft_arm_controller
+    type: $(arg execution_type)
+    joints:
+      - lft_shoulder_pan_joint
+      - lft_shoulder_lift_joint
+      - lft_elbow_joint
+      - lft_wrist_1_joint
+      - lft_wrist_2_joint
+      - lft_wrist_3_joint
+initial:  # Define initial robot poses.
+  - group: rgt_arm
+    pose: rgt_zero
+  - group: lft_arm
+    pose: lft_zero
