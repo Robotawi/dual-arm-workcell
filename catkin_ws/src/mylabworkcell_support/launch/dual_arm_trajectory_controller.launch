@@ -1,0 +1,6 @@
+<launch>
+    <rosparam file="$(find mylabworkcell_support)/config/trajectory_control.yaml" command="load" />
+
+    <node name="dual_arm_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/dual_arm" args="rgt_arm_joint_controller lft_arm_joint_controller" />
+
+</launch>
