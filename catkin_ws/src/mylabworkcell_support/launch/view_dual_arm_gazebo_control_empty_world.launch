@@ -1,0 +1,47 @@
+<launch>
+  <!-- This launch file starts
+  1. view_arm_gazebo_empty_world.launch, which does the following
+      1. robot description
+      2. empty world
+      3. robot spawner for gazebo
+  2. loads control configuration file (joint state controller and joint position controllers)
+  3. run controller spawner node and gives it the loaded control configuration file
+  3. robot state publisher, which publishes the joint states and transforms (TF)
+
+  Its purpose is simulation in a basic gazebo environment with position controllers started (motion planning is possible because robot state and controllers are launched)
+  We can make very basic motions with publishing joint values on the published controllers command topics
+-->
+
+
+  <!-- Launch Gazebo  -->
+  <include file="$(find mylabworkcell_support)/launch/view_arm_gazebo_empty_world.launch" />   
+
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find mylabworkcell_support)/config/dual_arm_gazebo_control.yaml" command="load"/>
+
+
+  <!-- spawn the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+	output="screen" ns="/dual_arm" args="joint_state_controller
+					  rgt_joint1_position_controller
+					  rgt_joint2_position_controller
+					  rgt_joint3_position_controller
+					  rgt_joint4_position_controller
+					  rgt_joint5_position_controller
+					  rgt_joint6_position_controller
+					  lft_joint1_position_controller
+					  lft_joint2_position_controller
+					  lft_joint3_position_controller
+					  lft_joint4_position_controller
+					  lft_joint5_position_controller
+					  lft_joint6_position_controller"/>
+
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+	respawn="false" output="screen">
+    <remap from="/joint_states" to="/dual_arm/joint_states" />
+  </node>
+
+</launch>
