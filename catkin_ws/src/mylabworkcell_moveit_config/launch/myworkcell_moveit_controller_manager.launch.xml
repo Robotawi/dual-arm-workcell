@@ -8,3 +8,5 @@
   <!-- loads ros_controllers to the param server -->
   <rosparam file="$(find mylabworkcell_moveit_config)/config/controllers.yaml"/>
 </launch>
+
+

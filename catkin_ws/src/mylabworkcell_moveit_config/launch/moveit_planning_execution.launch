@@ -8,3 +8,4 @@
     # The visualization component of MoveIt!
     <include file="$(find mylabworkcell_moveit_config)/launch/moveit_rviz.launch" />
 </launch>
+
