@@ -1,0 +1,43 @@
+dual_arm:
+  # Publish all joint states
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+  
+  # Position Controllers
+  rgt_joint1_position_controller:
+    type: position_controllers/JointPositionController
+    joint: rgt_shoulder_pan_joint
+  rgt_joint2_position_controller:
+    type: position_controllers/JointPositionController
+    joint: rgt_shoulder_lift_joint
+  rgt_joint3_position_controller:
+    type: position_controllers/JointPositionController
+    joint: rgt_elbow_joint
+  rgt_joint4_position_controller:
+    type: position_controllers/JointPositionController
+    joint: rgt_wrist_1_joint
+  rgt_joint5_position_controller:
+    type: position_controllers/JointPositionController
+    joint: rgt_wrist_2_joint
+  rgt_joint6_position_controller:
+    type: position_controllers/JointPositionController
+    joint: rgt_wrist_3_joint
+  lft_joint1_position_controller:
+    type: position_controllers/JointPositionController
+    joint: lft_shoulder_pan_joint
+  lft_joint2_position_controller:
+    type: position_controllers/JointPositionController
+    joint: lft_shoulder_lift_joint
+  lft_joint3_position_controller:
+    type: position_controllers/JointPositionController
+    joint: lft_elbow_joint
+  lft_joint4_position_controller:
+    type: position_controllers/JointPositionController
+    joint: lft_wrist_1_joint
+  lft_joint5_position_controller:
+    type: position_controllers/JointPositionController
+    joint: lft_wrist_2_joint
+  lft_joint6_position_controller:
+    type: position_controllers/JointPositionController
+    joint: lft_wrist_3_joint
