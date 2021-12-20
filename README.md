@@ -164,8 +164,17 @@ controller_list:
 
 8. In the `robot_name` package, add the launch file `robot_name_bringup_moveit.launch` file. The file loads the robot in a gazebo world, loads the two gazebo controllers, moveit_planning_execution launch file, and the robot state publisher. 
 
+9. In the `robot_name` package, robot model `xacro` file, make sure to include the gazebo ros control plugin with the correct namespace as follows. If not included, the controllers are not loaded. 
+```
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/dual_arm</robotNamespace>
+        </plugin>
+    </gazebo>
+
+```
 ## References:
-I found the ROS package for UR robots in the project of [O2AC](https://github.com/o2ac/o2ac-ur) truly beneficial to adjust the controllers constraints. Thanks to [Felix von Drigalski](https://github.com/felixvd) for making open-sourcing it. 
+I found the ROS package for UR robots in the project of [O2AC](https://github.com/o2ac/o2ac-ur) truly beneficial to adjust the controllers constraints. Thanks to [Felix von Drigalski](https://github.com/felixvd) for open-sourcing it. 
 
 ## Contact:
 In this project, I built everything from scratch because I love to understand how the internals of ROS work. This is a step towards my aim to actively contribute to robotics open-source software.
