@@ -157,6 +157,18 @@ controller_list:
     
 ```
 5. Create a launch file `moveit_planning_execution.launch` inside the config package launch directory. 
+```
+<launch>
+    # The planning and execution components of MoveIt! configured to 
+    # publish the current configuration of the robot (simulated or real)
+    # and the current state of the world as seen by the planner
+    <include file="$(find mylabworkcell_moveit_config)/launch/move_group.launch">
+        <arg name="publish_monitored_planning_scene" value="true" />
+    </include>
+    # The visualization component of MoveIt!
+    <include file="$(find mylabworkcell_moveit_config)/launch/moveit_rviz.launch" />
+</launch>
+```
 
 6. Edit the two files `myworkcell_moveit_controller_manager.launch` and `myworkcell_moveit_controller_manager.launch.xml` to load the `controllers.yaml` file instead of the default `ros_controllers.yaml` file. 
 
