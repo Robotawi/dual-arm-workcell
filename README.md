@@ -174,7 +174,28 @@ controller_list:
 
 7. In the `trajectory_execution.launch.xml`, comment the line 21 `<arg name="execution_type" value="$(arg execution_type)" />` as it causes an error of an unneeded argument. 
 
-8. In the `robot_name` package, add the launch file `robot_name_bringup_moveit.launch` file. The file loads the robot in a gazebo world, loads the two gazebo controllers, moveit_planning_execution launch file, and the robot state publisher. 
+8. In the `robot_name` package, add the launch file `robot_name_bringup_moveit.launch` file. The file loads the robot in a gazebo world, loads the two gazebo controllers, moveit_planning_execution launch file, and the robot state publisher. It should be as follows.
+```
+<launch>
+  <!-- Launch Gazebo  -->
+  <include file="$(find mylabworkcell_support)/launch/view_dual_arm_gazebo_empty_world.launch" />   
+
+  <!-- ros_control seven dof arm launch file -->
+  <include file="$(find mylabworkcell_support)/launch/dual_arm_gazebo_controller.launch" />   
+
+  <!-- ros_control trajectory control dof arm launch file -->
+  <include file="$(find mylabworkcell_support)/launch/dual_arm_trajectory_controller.launch" />    
+
+  <!-- moveit launch file -->
+  <include file="$(find mylabworkcell_moveit_config)/launch/moveit_planning_execution.launch" />    
+
+	<!-- publish joint states -->
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+		<param name="/use_gui" value="false"/>
+		<rosparam param="/source_list">[/move_group/fake_controller_joint_states]</rosparam>
+	</node>
+</launch>
+```
 
 9. In the `robot_name` package, robot model `xacro` file, make sure to include the gazebo ros control plugin with the correct namespace as follows. If not included, the controllers are not loaded. 
 ```
